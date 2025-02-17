@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B91F37B8-A4A6-4E11-99FF-E36C3734411C</string>
+				<string>FA693C60-B03B-4FB1-B06F-FBFB1D057BC8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -47,6 +47,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FA693C60-B03B-4FB1-B06F-FBFB1D057BC8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DBDF462-0E29-42CF-B4C7-9BE8E5683756</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>6F6DE751-6AE7-4664-B067-549F5B5CA044</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B91F37B8-A4A6-4E11-99FF-E36C3734411C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>akebuono</string>
@@ -58,6 +83,134 @@
 	<string>AudioSwitcher</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>audios</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>#!/bin/bash
+
+mode=$1
+
+echo '{"items": ['
+
+# input
+echo '{"title":'
+SwitchAudioSource -c -t input | xargs -I {} echo '"{}",';
+echo '"subtitle":"input"}'
+
+# output
+echo ',{"title":'
+SwitchAudioSource -c -t output | xargs -I {} echo '"{}",';
+echo '"subtitle":"output"}'
+
+echo ']}'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Check Current Source</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2DBDF462-0E29-42CF-B4C7-9BE8E5683756</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Change Input Source","arg":"input","subtitle":"input"},{"title":"Change Output Source","arg":"output","subtitle":"output"},{"title":"Check Current Source","arg":"status","subtitle":"status"}]</string>
+				<key>keyword</key>
+				<string>audio</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>in/out</string>
+				<key>title</key>
+				<string>Audio Switcher</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>8C21E4C4-9C91-4B9F-87E9-8CB9766FE173</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>status</string>
+						<key>outputlabel</key>
+						<string>status</string>
+						<key>uid</key>
+						<string>6F6DE751-6AE7-4664-B067-549F5B5CA044</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>{query}</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>FA693C60-B03B-4FB1-B06F-FBFB1D057BC8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -103,37 +256,6 @@
 			<string>F8234651-A7E9-4E00-B3CB-D1B1F8265531</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"Change Input Source","arg":"input","subtitle":"input"},{"title":"Change Output Source","arg":"output","subtitle":"output"}]</string>
-				<key>keyword</key>
-				<string>audio</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string>in/out</string>
-				<key>title</key>
-				<string>Audio Switcher</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>8C21E4C4-9C91-4B9F-87E9-8CB9766FE173</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -201,12 +323,19 @@ echo ']}'</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>2DBDF462-0E29-42CF-B4C7-9BE8E5683756</key>
+		<dict>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
 		<key>3EF839AB-0D3E-444E-BBA9-98AAF01E9E4A</key>
 		<dict>
 			<key>xpos</key>
-			<real>910</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>270</real>
 		</dict>
 		<key>8C21E4C4-9C91-4B9F-87E9-8CB9766FE173</key>
 		<dict>
@@ -218,16 +347,23 @@ echo ']}'</string>
 		<key>B91F37B8-A4A6-4E11-99FF-E36C3734411C</key>
 		<dict>
 			<key>xpos</key>
-			<real>370</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>270</real>
 		</dict>
 		<key>F8234651-A7E9-4E00-B3CB-D1B1F8265531</key>
 		<dict>
 			<key>xpos</key>
 			<real>645</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>270</real>
+		</dict>
+		<key>FA693C60-B03B-4FB1-B06F-FBFB1D057BC8</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
